@@ -2,17 +2,18 @@ require 'green_shoes'
 
 Shoes.app title: 'Usb', width: 500, height: 290 do
 
+  @edit_box = edit_box width: 500, height: 200
   Thread.new do
     loop do
-      @edit_box = edit_box width: 500, height: 200
+      
       @other = `lsusb -v`
       @other.split("\n").each do |item|
         if item.include?('iProduct') and item.split(' ').size == 5
-          @edit_box.text += "#{item.split(' ')[2]} #{item.split(' ')[3]} #{item.split(' ')[4]} \n\n"
+          @edit_box.text = "#{item.split(' ')[2]} #{item.split(' ')[3]} #{item.split(' ')[4]} \n\n"
         end
       end
       memory = `df -h`
-      media = `ls /media/dshaido`
+      media = `ls /media/vtishuk`
       media.split("\n").each do |device|
         memory.split("\n").each do |data|
           if data.include?device
