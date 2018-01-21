@@ -2,6 +2,7 @@ require 'green_shoes'
 
 Shoes.app title: 'Usb', width: 500, height: 290 do
 
+  user = `whoami`
   @edit_box = edit_box width: 500, height: 200
   Thread.new do
     loop do
@@ -13,7 +14,7 @@ Shoes.app title: 'Usb', width: 500, height: 290 do
         end
       end
       memory = `df -h`
-      media = `ls /media/vtishuk`
+      media = `ls /media/#{user}`
       media.split("\n").each do |device|
         memory.split("\n").each do |data|
           if data.include?device
