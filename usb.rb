@@ -2,7 +2,7 @@ require 'green_shoes'
 
 Shoes.app title: 'Usb', width: 500, height: 290 do
 
-  user = `whoami`
+  user = `logname`
   @edit_box = edit_box width: 500, height: 200
   Thread.new do
     loop do
