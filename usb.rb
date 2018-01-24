@@ -6,7 +6,13 @@ Shoes.app title: 'Usb', width: 500, height: 290 do
   @edit_box = edit_box width: 500, height: 200
   Thread.new do
     loop do
-      @edit_box.text = ""
+      @edit_box.text = ""      
+      @other = `lsusb -v`
+      @other.split("\n").each do |item|
+        if item.include?('iManufacturer') and item.split(' ')[1] == 1
+          @edit_box.text += "#{item.split(' ')[2]}\n\n"
+        end
+      end
       memory = `df -h`
       media = `ls /media/#{user}`
       media.split("\n").each do |device|
