@@ -8,9 +8,13 @@ Shoes.app title: 'Usb', width: 500, height: 290 do
     loop do
       @edit_box.text = ""      
       @other = `lsusb -v`
-      @other.split("\n").each do |item|
-        if item.include?('iManufacturer') and item.split(' ')[1].to_i == 1
-          @edit_box.text += "#{item.split(' ')[2]}\n\n"
+      @other.split("\n\n").each do |item|
+        if item.split(' ')[1].to_i == 2
+          item.split("\n").each do |string|
+            if string.include?('iManufacturer') and string.split(' ')[1].to_i == 1
+              @edit_box.text += "#{string.split(' ')[2]} #{string.split(' ')[3]} #{string.split(' ')[4]}\n\n"
+            end
+          end
         end
       end
       memory = `df -h`
