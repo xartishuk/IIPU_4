@@ -39,7 +39,7 @@ Shoes.app title: 'Usb', width: 500, height: 290 do
     memory = `df -h`
     memory.split("\n").each do |data|
       if data.include?@device.text
-        `sudo umount -f #{data.split(' ')[0]}`
+        `sudo umount #{data.split(' ')[0]}`
       end
     end
   end
